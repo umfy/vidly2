@@ -1,3 +1,4 @@
+const validateObjectId = require('../middleware/validateObjectId')
 const auth = require('../middleware/auth')
 const admin = require('../middleware/admin')
 const express = require('express')
@@ -13,10 +14,7 @@ router.get('/', async (req, res) => {
    res.send(generes)
 })
 
-router.get('/:id', async (req, res) => {
-   //if (!mongoose.Types.ObjectId.isValid(req.params.id))
-   // return res.status(404).send('Invalid ID')
-
+router.get('/:id', validateObjectId, async (req, res) => {
    const genere = await Genere.findById(req.params.id)
    if (!genere) return res.status(404).send("There's no such id")
    res.send(genere)
