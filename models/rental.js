@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
+const moment = require('moment')
 const rentalSchema = new mongoose.Schema({
    customer: {
       type: new mongoose.Schema({
@@ -58,6 +59,24 @@ const rentalSchema = new mongoose.Schema({
    },
 })
 
+//this represents Rental class, we cannot use =>
+rentalSchema.statics.lookup = function(customerId, movieId) {
+   return this.findOne({
+      'customer._id': customerId,
+      'movie._id': movieId,
+   });
+}
+// instance method
+rentalSchema.methods.setRentalFee = function(){
+   this.dateReturned = new Date()
+
+    let rentalDays = moment().diff(this.dateOut, 'days')
+    this.rentalFee = rentalDays * this.movie.dailyRentalRate
+}
+
+// THIS SHIT HAS TO BE BELOW OMG
+const Rental = mongoose.model('Rental', rentalSchema)
+
 function validateRental(rental) {
    const schema = Joi.object({
       customerId: Joi.objectId().required(),
@@ -65,8 +84,6 @@ function validateRental(rental) {
    })
    return schema.validate(rental)
 }
-
-const Rental = mongoose.model('Rental', rentalSchema)
 
 module.exports.Rental = Rental
 module.exports.validate = validateRental

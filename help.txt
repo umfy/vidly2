@@ -1,0 +1,14 @@
+// --runInBand
+
+VLC
+resize interface to video size
+
+
+
+MAx user watches error:
+cat /proc/sys/fs/inotify/max_user_watches
+sudo sysctl fs.inotify.max_user_watches=524288
+sudo sysctl -p
+
+jump back to function
+shift control O 

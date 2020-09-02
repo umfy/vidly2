@@ -1,0 +1,2 @@
+export jwtPrivateToken='12345'
+export NODE_ENV='test'
