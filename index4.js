@@ -6,6 +6,7 @@ require('./startup/routes')(app)
 require('./startup/db')() // it's function, so it needs to be called
 require('./startup/config')()
 require('./startup/validation')()
+require('./startup/prod')(app)
 
 //     EXCEPTION
 // throw new Error('FATALNIE')
