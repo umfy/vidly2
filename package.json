@@ -15,8 +15,10 @@
    "dependencies": {
       "bcrypt": "^5.0.0",
       "config": "^3.3.1",
+      "compression": "^1.7.4",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
+      "helmet": "^4.1.0",
       "jest": "^26.4.0",
       "joi": "^17.1.1",
       "joi-objectid": "^3.0.1",
